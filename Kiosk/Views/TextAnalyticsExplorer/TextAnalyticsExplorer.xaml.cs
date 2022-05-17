@@ -175,13 +175,14 @@ namespace IntelligentKioskSample.Views.TextAnalyticsExplorer
 
                     // mined opinions
                     OpinionMiningCollection.Clear();
-                    var minedOpinions = documentSentiment?.Sentences.SelectMany(s => s.MinedOpinions);
+                    var minedOpinions = documentSentiment?.Sentences.SelectMany(s => s.Opinions /* s.MinedOpinions*/);
                     if (minedOpinions != null && minedOpinions.Any())
                     {
                         var minedOpinionList = minedOpinions.Select(om => new MinedOpinion()
                         {
-                            Aspect = om.Aspect.Text,
-                            Opinions = string.Join(", ", om.Opinions.Select(o => $"{o.Text} ({o.Sentiment.ToString("G")})"))
+                            Aspect = om.Target.Text, // om.Aspect.Text,
+                            Opinions = string.Join(", ", om.Assessments.Select(o => $"{o.Text} ({o.Sentiment.ToString("G")})"))
+                            //Opinions = string.Join(", ", om.Opinions.Select(o => $"{o.Text} ({o.Sentiment.ToString("G")})"))
                         });
                         OpinionMiningCollection.AddRange(minedOpinionList);
                     }

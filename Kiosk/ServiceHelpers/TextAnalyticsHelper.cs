@@ -116,7 +116,7 @@ namespace ServiceHelpers
 
         public static async Task<DocumentSentiment> AnalyzeSentimentAsync(string input, string language = null, bool includeOpinionMining = false)
         {
-            var options = new AnalyzeSentimentOptions() { IncludeOpinionMining = includeOpinionMining };
+            var options = new AnalyzeSentimentOptions() { /* IncludeOpinionMining = includeOpinionMining */ };
             return await client.AnalyzeSentimentAsync(input, language, options);
         }
 
